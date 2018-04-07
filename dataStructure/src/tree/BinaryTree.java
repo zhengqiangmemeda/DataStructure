@@ -76,6 +76,28 @@ public class BinaryTree {
 			}
 		}
 	}
+	//
+	public int getDepth(TreeNode root){
+		if(root==null)
+			return 0;
+		int depth=0;
+		int count=0;
+		LinkedList<TreeNode> queue=new LinkedList<TreeNode>();
+		queue.add(root);
+		while(!queue.isEmpty()){
+			count=queue.size();
+			while(count>0){
+				TreeNode temp=queue.remove();
+				count--;
+				if(temp.left!=null)
+					queue.add(temp.left);
+				if(temp.right!=null)
+					queue.add(temp.right);
+			}
+			depth++;		
+		}
+		return depth;
+	}
 
 	public static void main(String[] args) {
 		
@@ -115,6 +137,8 @@ public class BinaryTree {
 		System.out.print("levelOrderVisit: ");
 		tree.levelOrderVisit(node1);
 		System.out.println();
+		
+		System.out.print("the depth of the tree is: "+tree.getDepth(node1));
 	}
 
 }
